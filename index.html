@@ -259,9 +259,42 @@ body.content-mode .bottom-bar { display: flex; }
   .bb-btn { padding: 10px 12px; font-size: 13px; }
   .gallery { gap: 18px; }
 }
+
+/* 首次加载进度 */
+body.is-loading { overflow: hidden; }
+.page-loader { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 24px; background: #fafbfc; transition: opacity .3s ease; }
+.page-loader.is-done { opacity: 0; pointer-events: none; }
+.loader-panel { width: min(340px, 100%); text-align: center; color: #1e293b; }
+.loader-spinner { width: 44px; height: 44px; margin: 0 auto 24px; border: 4px solid #dbeafe; border-top-color: #3b82f6; border-radius: 50%; animation: loaderSpin .9s linear infinite; }
+.loader-title { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+.loader-detail { color: #64748b; font-size: 14px; line-height: 1.8; min-height: 50px; }
+.loader-progress { width: 100%; height: 6px; margin: 20px 0 10px; accent-color: #3b82f6; }
+.loader-count { font-size: 13px; color: #3b82f6; font-variant-numeric: tabular-nums; }
+.loader-actions { display: flex; gap: 10px; justify-content: center; margin-top: 22px; }
+.loader-actions[hidden] { display: none; }
+.loader-actions button { border: 0; border-radius: 999px; padding: 11px 18px; font: inherit; font-size: 13px; cursor: pointer; background: #eaf2ff; color: #2563eb; }
+@keyframes loaderSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .loader-spinner { animation: none; } .page-loader { transition: none; } }
+
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+<div class="page-loader" id="pageLoader" role="status" aria-live="polite">
+  <div class="loader-panel">
+    <div class="loader-spinner" aria-hidden="true"></div>
+    <div class="loader-title" id="loaderTitle">正在打开豆芽的作品集</div>
+    <p class="loader-detail" id="loaderDetail">正在加载图片和视频<br>首次打开可能需要一些时间</p>
+    <progress class="loader-progress" id="loaderProgress" value="0" max="11" aria-label="作品资源加载进度"></progress>
+    <div class="loader-count" id="loaderCount">已就绪 0 / 11</div>
+    <div class="loader-actions" id="loaderActions" hidden>
+      <button type="button" id="loaderRetry">重新加载</button>
+      <button type="button" id="loaderContinue">先进入作品集</button>
+    </div>
+  </div>
+</div>
+<noscript><style>.page-loader { display:none; } .card {opacity:1;}</style></noscript>
+
 
 <nav>
   <div class="logo"><span>✦</span> 豆芽的作品集</div>
@@ -480,12 +513,77 @@ var DATA = {"images":{"resume":["assets/resume/企业微信截图_17916109822899
   renderVideos('videos-ux', DATA.videos.ux || []);
   renderGallery('gallery-ux', DATA.images.ux || []);
 
-  window.addEventListener('load', function () {
-    void document.body.offsetHeight;
-    for (var i = 0; i < cards.length; i++) {
-      (function (idx) { setTimeout(function () { cards[idx].style.opacity = '1'; }, 300 + idx * 80); })(i);
+
+  // 按实际资源就绪事件更新进度，避免依赖整个 window.load。
+  var loader = document.getElementById('pageLoader');
+  var progress = document.getElementById('loaderProgress');
+  var count = document.getElementById('loaderCount');
+  var detail = document.getElementById('loaderDetail');
+  var actions = document.getElementById('loaderActions');
+  var media = Array.prototype.slice.call(document.querySelectorAll('.gallery img, .videos video'));
+  var completed = 0, failed = 0, dismissed = false;
+  progress.max = media.length;
+  var pageControls = document.querySelectorAll('nav, main, .content-view, .bottom-bar');
+  for (var pc = 0; pc < pageControls.length; pc++) pageControls[pc].inert = true;
+
+  function enterPortfolio() {
+    if (dismissed) return;
+    dismissed = true;
+    clearTimeout(slowTimer);
+    document.body.classList.remove('is-loading');
+    for (var pc = 0; pc < pageControls.length; pc++) pageControls[pc].inert = false;
+    for (var i = 0; i < cards.length; i++) cards[i].style.opacity = '1';
+    loader.classList.add('is-done');
+    setTimeout(function () { loader.hidden = true; loader.style.display = 'none'; }, 320);
+  }
+  document.getElementById('loaderContinue').addEventListener('click', enterPortfolio);
+  document.getElementById('loaderRetry').addEventListener('click', function () { window.location.reload(); });
+  var slowTimer = setTimeout(function () {
+    if (dismissed) return;
+    detail.textContent = '当前网络加载较慢，可以继续等待，或先进入查看已加载的作品。';
+    actions.hidden = false;
+  }, 20000);
+  function updateLoading() {
+    progress.value = completed;
+    count.textContent = '已就绪 ' + (completed - failed) + ' / ' + media.length + (failed ? ' · ' + failed + ' 项加载失败' : '');
+    if (completed !== media.length || dismissed) return;
+    if (failed) {
+      clearTimeout(slowTimer);
+      document.getElementById('loaderTitle').textContent = '部分作品暂未加载成功';
+      detail.textContent = '可以重新加载，或先进入查看已加载的作品。';
+      actions.hidden = false;
+    } else {
+      document.getElementById('loaderTitle').textContent = '加载完成';
+      detail.textContent = '图片和视频已就绪，即将进入作品集';
+      setTimeout(enterPortfolio, 250);
     }
+  }
+  media.forEach(function (item) {
+    var settled = false;
+    var isImage = item.tagName === 'IMG';
+    var readyEvent = isImage ? 'load' : 'loadeddata';
+    function finish(ok) {
+      if (settled) return;
+      settled = true;
+      item.removeEventListener(readyEvent, ready);
+      item.removeEventListener('error', error);
+      completed++;
+      if (!ok) failed++;
+      updateLoading();
+    }
+    function ready() {
+      if (isImage && item.decode) item.decode().then(function () { finish(true); }, function () { finish(item.naturalWidth > 0); });
+      else finish(true);
+    }
+    function error() { finish(false); }
+    item.addEventListener(readyEvent, ready);
+    item.addEventListener('error', error);
+    if (isImage && item.complete) { if (item.naturalWidth > 0) ready(); else error(); }
+    else if (!isImage && item.error) error();
+    else if (!isImage && item.readyState >= 2) ready();
   });
+  updateLoading();
+
 })();
 </script>
 
