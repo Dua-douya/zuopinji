@@ -260,6 +260,25 @@ body.content-mode .bottom-bar { display: flex; }
   .gallery { gap: 18px; }
 }
 
+/* UX 画板：等宽网格 + 高清查看器 */
+.ux-board-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.ux-board-card { border:0; padding:0; overflow:hidden; border-radius:18px; background:#fff; color:#334155; cursor:zoom-in; box-shadow:0 14px 38px rgba(15,23,42,.12); text-align:left; transition:transform .25s,box-shadow .25s; }
+.ux-board-card:hover { transform:translateY(-4px); box-shadow:0 20px 46px rgba(15,23,42,.18); }
+.ux-board-preview { height:440px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden; background:#eef2f7; }
+.ux-board-preview img { display:block; width:100%; height:100%; object-fit:contain; object-position:top center; }
+.ux-board-caption { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 18px; font-size:14px; font-weight:800; }
+.ux-board-caption span:last-child { color:#3b82f6; font-size:12px; font-weight:700; }
+.image-viewer { width:100vw; max-width:none; height:100vh; max-height:none; margin:0; padding:0; border:0; background:#111827; color:#fff; }
+.image-viewer::backdrop { background:rgba(2,6,23,.88); }
+.viewer-toolbar { position:sticky; top:0; z-index:2; display:flex; align-items:center; gap:8px; padding:12px 16px; background:rgba(15,23,42,.94); border-bottom:1px solid rgba(255,255,255,.12); }
+.viewer-title { margin-right:auto; font-size:14px; font-weight:700; }
+.viewer-toolbar button,.viewer-toolbar a { border:0; border-radius:999px; padding:9px 14px; background:#26344b; color:#fff; font:inherit; font-size:13px; text-decoration:none; cursor:pointer; }
+.viewer-toolbar button:hover,.viewer-toolbar a:hover { background:#3b82f6; }
+.viewer-canvas { height:calc(100vh - 61px); overflow:auto; padding:28px; text-align:center; }
+.viewer-canvas img { display:block; margin:0 auto; max-width:none; height:auto; background:#fff; box-shadow:0 12px 48px rgba(0,0,0,.35); }
+.resume-table-card { cursor:zoom-in; }
+@media (max-width:820px) { .ux-board-grid{grid-template-columns:1fr}.ux-board-preview{height:400px}.viewer-toolbar{flex-wrap:wrap}.viewer-title{width:100%;margin-bottom:4px}.viewer-canvas{height:calc(100vh - 108px);padding:14px} }
+
 /* 首次加载进度 */
 body.is-loading { overflow: hidden; }
 .page-loader { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 24px; background: #fafbfc; transition: opacity .3s ease; }
@@ -329,7 +348,8 @@ body.is-loading { overflow: hidden; }
     <h1>简历</h1>
     <p class="lede">个人简历与作品总览。</p>
   </div>
-  <div class="block"><h2 class="block-title">🖼 图集</h2><div class="gallery" id="gallery-resume"></div></div>
+  <div class="block"><h2 class="block-title">🖼 简历</h2><div class="gallery" id="gallery-resume"></div></div>
+  <div class="block"><h2 class="block-title">🎮 过往游戏经历</h2><div class="gallery"><button type="button" class="art resume-table-card" data-full="assets/resume/game-history.svg" data-title="过往游戏经历"><img src="assets/resume/game-history.svg" alt="过往游戏经历表"></button></div></div>
 </section>
 
 <section class="content-view" id="view-ui" data-key="ui">
@@ -347,9 +367,21 @@ body.is-loading { overflow: hidden; }
     <h1>UX 体验</h1>
     <p class="lede">体验设计与交互流程。</p>
   </div>
-  <div class="block"><h2 class="block-title">🎬 视频</h2><div class="videos" id="videos-ux"></div></div>
-  <div class="block"><h2 class="block-title">🖼 图集</h2><div class="gallery" id="gallery-ux"></div></div>
+  <div class="block"><h2 class="block-title">🧭 UX 画板</h2><div class="ux-board-grid" id="uxBoardGrid"></div></div>
+  <div class="block"><h2 class="block-title">🎬 交互视频</h2><div class="videos" id="videos-ux"></div></div>
 </section>
+
+<dialog class="image-viewer" id="imageViewer">
+  <div class="viewer-toolbar">
+    <span class="viewer-title" id="viewerTitle">高清画板</span>
+    <button type="button" id="zoomOut">－ 缩小</button>
+    <button type="button" id="zoomReset">适合窗口</button>
+    <button type="button" id="zoomIn">＋ 放大</button>
+    <a id="viewerOriginal" href="#" target="_blank" rel="noopener">新窗口打开</a>
+    <button type="button" id="viewerClose">关闭</button>
+  </div>
+  <div class="viewer-canvas" id="viewerCanvas"><img id="viewerImage" alt="高清作品图"></div>
+</dialog>
 
 <section class="content-view" id="view-refactor" data-key="refactor">
   <div class="head">
@@ -377,7 +409,7 @@ body.is-loading { overflow: hidden; }
 
 <script>
 /* 数据由 build_site.py 注入：images 为 base64 内嵌，videos 为文件名（相对 ./video/） */
-var DATA = {"images":{"resume":["assets/resume/企业微信截图_17916109822899.png"],"ui":["assets/ui/企业微信截图_17916113297865.png"],"ux":["assets/ux/企业微信截图_17916258295925.png"],"refactor":["assets/refactor/企业微信截图_17916222806013.png"],"ai":["assets/ai/企业微信截图_17916198114788.png"]},"videos":{"ux":[{"file":"video/video_01.mp4","name":"Infinity Dragons 2026-10-10 10-28-48.mp4"},{"file":"video/video_02.mp4","name":"Infinity Dragons 2026-10-10 10-31-02.mp4"},{"file":"video/video_03.mp4","name":"Infinity Dragons 2026-10-10 10-33-35.mp4"},{"file":"video/video_04.mp4","name":"Infinity Dragons 2026-10-10 10-40-48.mp4"},{"file":"video/video_05.mp4","name":"client - world_1 - Windows, Mac, Linux - Unity 2022.3.62f2 _DX11_ 2026-10-10 10-46-12.mp4"},{"file":"video/video_06.mp4","name":"client - world_1 - Windows, Mac, Linux - Unity 2022.3.62f2 _DX11_ 2026-10-10 10-46-45.mp4"}]}};
+var DATA = {"images":{"resume":["assets/resume/企业微信截图_17916109822899.png"],"ui":["assets/ui/企业微信截图_17916113297865.png"],"refactor":["assets/refactor/企业微信截图_17916222806013.png"],"ai":["assets/ai/企业微信截图_17916198114788.png"]},"uxBoards":[{"thumb":"assets/ux/thumbs/ux-01.webp","full":"assets/ux/ux-01.svg","name":"UX 画板 01"},{"thumb":"assets/ux/thumbs/ux-02.webp","full":"assets/ux/ux-02.svg","name":"UX 画板 02"},{"thumb":"assets/ux/thumbs/ux-03.webp","full":"assets/ux/ux-03.svg","name":"UX 画板 03"},{"thumb":"assets/ux/thumbs/ux-04.webp","full":"assets/ux/ux-04.svg","name":"UX 画板 04"},{"thumb":"assets/ux/thumbs/ux-05.webp","full":"assets/ux/ux-05.svg","name":"UX 画板 05"},{"thumb":"assets/ux/thumbs/ux-06.webp","full":"assets/ux/ux-06.svg","name":"UX 画板 06"},{"thumb":"assets/ux/thumbs/ux-07.webp","full":"assets/ux/ux-07.svg","name":"UX 画板 07"}],"videos":{"ux":[{"file":"video/video_01.mp4","name":"Infinity Dragons 2026-10-10 10-28-48.mp4"},{"file":"video/video_02.mp4","name":"Infinity Dragons 2026-10-10 10-31-02.mp4"},{"file":"video/video_03.mp4","name":"Infinity Dragons 2026-10-10 10-33-35.mp4"},{"file":"video/video_04.mp4","name":"Infinity Dragons 2026-10-10 10-40-48.mp4"},{"file":"video/video_05.mp4","name":"client - world_1 - Windows, Mac, Linux - Unity 2022.3.62f2 _DX11_ 2026-10-10 10-46-12.mp4"},{"file":"video/video_06.mp4","name":"client - world_1 - Windows, Mac, Linux - Unity 2022.3.62f2 _DX11_ 2026-10-10 10-46-45.mp4"}]}};
 
 (function () {
   var VIEWS = ['resume', 'ui', 'ux', 'refactor', 'ai'];
@@ -505,13 +537,46 @@ var DATA = {"images":{"resume":["assets/resume/企业微信截图_17916109822899
     }
   }
 
+  var viewer = document.getElementById('imageViewer');
+  var viewerImage = document.getElementById('viewerImage');
+  var viewerCanvas = document.getElementById('viewerCanvas');
+  var viewerTitle = document.getElementById('viewerTitle');
+  var viewerOriginal = document.getElementById('viewerOriginal');
+  var viewerZoom = 1;
+  function applyViewerZoom() { viewerImage.style.width = Math.max(80, Math.round(viewerImage.naturalWidth * viewerZoom)) + 'px'; }
+  function fitViewer() { if (!viewerImage.naturalWidth) return; viewerZoom = Math.min(1, (viewerCanvas.clientWidth - 56) / viewerImage.naturalWidth); applyViewerZoom(); viewerCanvas.scrollTo(0,0); }
+  function openViewer(src, title) {
+    viewerTitle.textContent = title || '高清作品图'; viewerOriginal.href = src; viewerImage.removeAttribute('src');
+    viewer.showModal(); viewerImage.onload = fitViewer; viewerImage.src = src;
+  }
+  document.getElementById('viewerClose').addEventListener('click', function(){ viewer.close(); viewerImage.removeAttribute('src'); });
+  document.getElementById('zoomIn').addEventListener('click', function(){ viewerZoom = Math.min(4, viewerZoom * 1.25); applyViewerZoom(); });
+  document.getElementById('zoomOut').addEventListener('click', function(){ viewerZoom = Math.max(.08, viewerZoom / 1.25); applyViewerZoom(); });
+  document.getElementById('zoomReset').addEventListener('click', fitViewer);
+  viewer.addEventListener('click', function(e){ if(e.target === viewer) viewer.close(); });
+  document.querySelector('.resume-table-card').addEventListener('click', function(){ openViewer(this.getAttribute('data-full'), this.getAttribute('data-title')); });
+
+  function renderUxBoards(items) {
+    var box = document.getElementById('uxBoardGrid');
+    for (var i = 0; i < items.length; i++) {
+      (function(item){
+        var card = document.createElement('button'); card.type='button'; card.className='ux-board-card';
+        var preview = document.createElement('div'); preview.className='ux-board-preview';
+        var img = document.createElement('img'); img.src=item.thumb; img.alt=item.name; img.loading='eager';
+        var caption = document.createElement('div'); caption.className='ux-board-caption'; caption.innerHTML='<span>'+item.name+'</span><span>点击放大查看</span>';
+        preview.appendChild(img); card.appendChild(preview); card.appendChild(caption); box.appendChild(card);
+        card.addEventListener('click', function(){ openViewer(item.full, item.name); });
+      })(items[i]);
+    }
+  }
+
   var groups = ['resume', 'ui', 'refactor', 'ai'];
   for (var g = 0; g < groups.length; g++) {
     var key = groups[g];
     renderGallery('gallery-' + key, DATA.images[key] || []);
   }
+  renderUxBoards(DATA.uxBoards || []);
   renderVideos('videos-ux', DATA.videos.ux || []);
-  renderGallery('gallery-ux', DATA.images.ux || []);
 
 
   // 按实际资源就绪事件更新进度，避免依赖整个 window.load。
@@ -520,7 +585,7 @@ var DATA = {"images":{"resume":["assets/resume/企业微信截图_17916109822899
   var count = document.getElementById('loaderCount');
   var detail = document.getElementById('loaderDetail');
   var actions = document.getElementById('loaderActions');
-  var media = Array.prototype.slice.call(document.querySelectorAll('.gallery img, .videos video'));
+  var media = Array.prototype.slice.call(document.querySelectorAll('.gallery img, .ux-board-preview img, .videos video'));
   var completed = 0, failed = 0, dismissed = false;
   progress.max = media.length;
   var pageControls = document.querySelectorAll('nav, main, .content-view, .bottom-bar');
