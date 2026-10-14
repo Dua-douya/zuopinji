@@ -211,8 +211,8 @@ body.content-mode .hint-dots { display: none; }
   animation: rise 0.5s both; cursor: zoom-in;
 }
 .art img { display: block; width: 100%; height: auto; }
-#gallery-ai .art { overflow-x:auto; cursor:zoom-in; }
-#gallery-ai .art img { width:2400px; max-width:none; }
+#gallery-ai .art { max-width:100%; overflow:hidden; cursor:zoom-in; }
+#gallery-ai .art img { width:100%; max-width:100%; height:auto; }
 .ai-description { background:#262626; color:#f3f4f6; padding:24px; border-radius:18px; }
 .ai-description h3 { font-size:26px; margin:0 0 14px; }
 .ai-description p { font-size:18px; line-height:1.9; margin:12px 0; }
@@ -422,7 +422,7 @@ body.is-loading { overflow: hidden; }
       <p><strong>功能说明：</strong>针对德天瀑布景区国庆假期买票难的问题：即使刷出退票余票，重新填写购票信息再提交订单也只能拼手速，因此提供自动抢票解决方案。</p>
       <p><strong>设计说明：</strong>作为挂机抢票工具，视觉以不影响使用为主。全程由 AI 制作，最后顺利抢到票。</p>
     </div>
-    <p class="ai-reading-hint">下方图稿已放大显示，可左右滑动查看各列；点击图稿进入大图阅读。</p>
+    <p class="ai-reading-hint">点击图稿进入大图阅读；电脑端按住 Ctrl 滚动鼠标滚轮可放大查看细节。</p>
     <div class="gallery" id="gallery-ai"></div></div>
 </section>
 
