@@ -483,10 +483,12 @@ body.is-loading { overflow: hidden; }
 /* 数据由 build_site.py 注入：images 为 base64 内嵌，videos 为文件名（相对 ./video/） */
 var DATA = {"images":{"resume":["assets/resume/企业微信截图_17916109822899.png"],"ui":["assets/ui/企业微信截图_17916113297865.png"],"refactor":["assets/refactor/企业微信截图_17916222806013.png"],"ai":["assets/ai/企业微信截图_17916198114788.png"]},"uxBoards":[{"thumb":"assets/ux/thumbs/ux-01.webp","full":"assets/ux/ux-01.svg","name":"UX 画板 01"},{"thumb":"assets/ux/thumbs/ux-02.webp","full":"assets/ux/ux-02.svg","name":"UX 画板 02"},{"thumb":"assets/ux/thumbs/ux-03.webp","full":"assets/ux/ux-03.svg","name":"UX 画板 03"},{"thumb":"assets/ux/thumbs/ux-04.webp","full":"assets/ux/ux-04.svg","name":"UX 画板 04"},{"thumb":"assets/ux/thumbs/ux-05.webp","full":"assets/ux/ux-05.svg","name":"UX 画板 05"},{"thumb":"assets/ux/thumbs/ux-06.webp","full":"assets/ux/ux-06.svg","name":"UX 画板 06"},{"thumb":"assets/ux/thumbs/ux-07.webp","full":"assets/ux/ux-07.svg","name":"UX 画板 07"}],"videos":{"ux":[{"file":"video/video_01.mp4","name":"Infinity Dragons 2026-10-10 10-28-48.mp4"},{"file":"video/video_02.mp4","name":"Infinity Dragons 2026-10-10 10-31-02.mp4"},{"file":"video/video_03.mp4","name":"Infinity Dragons 2026-10-10 10-33-35.mp4"},{"file":"video/video_04.mp4","name":"Infinity Dragons 2026-10-10 10-40-48.mp4"},{"file":"video/video_05.mp4","name":"client - world_1 - Windows, Mac, Linux - Unity 2022.3.62f2 _DX11_ 2026-10-10 10-46-12.mp4"},{"file":"video/video_06.mp4","name":"client - world_1 - Windows, Mac, Linux - Unity 2022.3.62f2 _DX11_ 2026-10-10 10-46-45.mp4"}]}};
 
+DATA.videos.ux = DATA.videos.ux.filter(function(_,i){return i !== 1 && i !== 4;});
 DATA.images.resume = ["assets/resume/resume-preview.webp"];
-DATA.images.ai = ["assets/ai/ai-readable.svg"];
+DATA.images.ai = ["assets/ai/ai-balanced.svg"];
 DATA.images.ui = Array.from({length:10}, function(_,i){return 'assets/mobile/ui-part-' + String(i+1).padStart(2,'0') + '.webp';});
-DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobile/refactor-part-' + String(i+1).padStart(2,'0') + '.webp';});
+DATA.imageDimensions = {"assets/mobile/norm-balanced-desktop-01.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-02.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-03.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-04.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-05.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-06.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-07.webp":{"width":2276,"height":1802},"assets/mobile/norm-balanced-phone-01.webp":{"width":1170,"height":3200},"assets/mobile/norm-balanced-phone-02.webp":{"width":1170,"height":3200},"assets/mobile/norm-balanced-phone-03.webp":{"width":1170,"height":3200},"assets/mobile/norm-balanced-phone-04.webp":{"width":1170,"height":3206}};
+DATA.images.refactor = (window.matchMedia('(max-width:560px)').matches ? ["assets/mobile/norm-balanced-phone-01.webp","assets/mobile/norm-balanced-phone-02.webp","assets/mobile/norm-balanced-phone-03.webp","assets/mobile/norm-balanced-phone-04.webp"] : ["assets/mobile/norm-balanced-desktop-01.webp","assets/mobile/norm-balanced-desktop-02.webp","assets/mobile/norm-balanced-desktop-03.webp","assets/mobile/norm-balanced-desktop-04.webp","assets/mobile/norm-balanced-desktop-05.webp","assets/mobile/norm-balanced-desktop-06.webp","assets/mobile/norm-balanced-desktop-07.webp"]);
 
 (function () {
   var VIEWS = ['resume', 'ui', 'ux', 'refactor', 'ai'];
@@ -631,7 +633,7 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
             openViewer('assets/resume/resume-complete.svg', '简历', 'resume');
           });
         } else if (containerId === 'gallery-ai') {
-          var aiFull = window.matchMedia('(max-width:560px)').matches ? 'assets/mobile/ai-readable-phone.webp' : 'assets/ai/ai-readable.svg';
+          var aiFull = window.matchMedia('(max-width:560px)').matches ? 'assets/mobile/ai-balanced-phone.webp' : 'assets/ai/ai-balanced.svg';
           art.href = aiFull;
           art.addEventListener('click', function (e) {
             e.preventDefault();
@@ -641,14 +643,15 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
         var img = document.createElement('img');
         img.setAttribute('data-src', src); img.alt = '作品图';
         if(containerId==='gallery-ui' || containerId==='gallery-refactor'){
-          img.width=2276; img.height=3200;
+          var dims=DATA.imageDimensions && DATA.imageDimensions[src];
+          img.width=dims?dims.width:2276; img.height=dims?dims.height:3200;
           if(containerId==='gallery-ui' && /part-10/.test(src))img.height=2612;
           if(containerId==='gallery-refactor' && /part-07/.test(src))img.height=1648;
-          img.setAttribute('data-srcset',src.replace('.webp','-phone.webp') + ' 1170w, ' + src + ' 2276w');
+          if(containerId==='gallery-ui'){img.setAttribute('data-srcset',src.replace('.webp','-phone.webp') + ' 1170w, ' + src + ' 2276w');}
           img.sizes = '(max-width:560px) calc(100vw - 28px), (max-width:1100px) calc(100vw - 80px), (max-width:1560px) calc(100vw - 144px), 1416px';
         }
         if (containerId === 'gallery-ai') {
-          if(window.matchMedia('(max-width:560px)').matches){img.setAttribute('data-src','assets/mobile/ai-readable-phone.webp');}
+          if(window.matchMedia('(max-width:560px)').matches){img.setAttribute('data-src','assets/mobile/ai-balanced-phone.webp');}
           img.style.width = '100%';
           img.style.maxWidth = '100%';
           img.style.height = 'auto';
@@ -826,3 +829,4 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
 
 </body>
 </html>
+
