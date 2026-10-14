@@ -490,8 +490,8 @@ DATA.videos.ux = DATA.videos.ux.filter(function(_,i){return i !== 1 && i !== 4;}
 DATA.images.resume = ["assets/resume/resume-preview.webp"];
 DATA.images.ai = ["assets/ai/ai-pc20.svg"];
 DATA.images.ui = Array.from({length:10}, function(_,i){return 'assets/mobile/ui-part-' + String(i+1).padStart(2,'0') + '.webp';});
-DATA.imageDimensions = {"assets/mobile/norm-balanced-desktop-01.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-02.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-03.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-04.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-05.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-06.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-07.webp":{"width":2276,"height":2052},"assets/mobile/norm-balanced-phone-01.webp":{"width":1170,"height":3200},"assets/mobile/norm-balanced-phone-02.webp":{"width":1170,"height":3200},"assets/mobile/norm-balanced-phone-03.webp":{"width":1170,"height":3200},"assets/mobile/norm-balanced-phone-04.webp":{"width":1170,"height":3206}};
-DATA.images.refactor = (window.matchMedia('(max-width:560px)').matches ? ["assets/mobile/norm-balanced-phone-01.webp","assets/mobile/norm-balanced-phone-02.webp","assets/mobile/norm-balanced-phone-03.webp","assets/mobile/norm-balanced-phone-04.webp"] : ["assets/mobile/norm-balanced-desktop-01.webp","assets/mobile/norm-balanced-desktop-02.webp","assets/mobile/norm-balanced-desktop-03.webp","assets/mobile/norm-pc20-desktop-04.webp","assets/mobile/norm-pc20-desktop-05.webp","assets/mobile/norm-pc20-desktop-06.webp","assets/mobile/norm-pc20-desktop-07.webp"]);
+DATA.imageDimensions = {"assets/mobile/norm-balanced-desktop-01.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-02.webp":{"width":2276,"height":3200},"assets/mobile/norm-balanced-desktop-03.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-04.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-05.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-06.webp":{"width":2276,"height":3200},"assets/mobile/norm-pc20-desktop-07.webp":{"width":2276,"height":2052},"assets/mobile/norm-mobile-ratio-phone-01.webp":{"width":1170,"height":3200},"assets/mobile/norm-mobile-ratio-phone-02.webp":{"width":1170,"height":3200},"assets/mobile/norm-mobile-ratio-phone-03.webp":{"width":1170,"height":3200},"assets/mobile/norm-mobile-ratio-phone-04.webp":{"width":1170,"height":2602}};
+DATA.images.refactor = (window.matchMedia('(max-width:560px)').matches ? ["assets/mobile/norm-mobile-ratio-phone-01.webp","assets/mobile/norm-mobile-ratio-phone-02.webp","assets/mobile/norm-mobile-ratio-phone-03.webp","assets/mobile/norm-mobile-ratio-phone-04.webp"] : ["assets/mobile/norm-balanced-desktop-01.webp","assets/mobile/norm-balanced-desktop-02.webp","assets/mobile/norm-balanced-desktop-03.webp","assets/mobile/norm-pc20-desktop-04.webp","assets/mobile/norm-pc20-desktop-05.webp","assets/mobile/norm-pc20-desktop-06.webp","assets/mobile/norm-pc20-desktop-07.webp"]);
 
 (function () {
   var VIEWS = ['resume', 'ui', 'ux', 'refactor', 'ai'];
@@ -636,7 +636,7 @@ DATA.images.refactor = (window.matchMedia('(max-width:560px)').matches ? ["asset
             openViewer('assets/resume/resume-complete.svg', '简历', 'resume');
           });
         } else if (containerId === 'gallery-ai') {
-          var aiFull = window.matchMedia('(max-width:560px)').matches ? 'assets/mobile/ai-balanced-phone.webp' : 'assets/ai/ai-pc20.svg';
+          var aiFull = window.matchMedia('(max-width:560px)').matches ? 'assets/mobile/ai-mobile-ratio.webp' : 'assets/ai/ai-pc20.svg';
           art.href = aiFull;
           art.addEventListener('click', function (e) {
             e.preventDefault();
@@ -654,7 +654,7 @@ DATA.images.refactor = (window.matchMedia('(max-width:560px)').matches ? ["asset
           img.sizes = '(max-width:560px) calc(100vw - 28px), (max-width:1100px) calc(100vw - 80px), (max-width:1560px) calc(100vw - 144px), 1416px';
         }
         if (containerId === 'gallery-ai') {
-          if(window.matchMedia('(max-width:560px)').matches){img.setAttribute('data-src','assets/mobile/ai-balanced-phone.webp');}
+          if(window.matchMedia('(max-width:560px)').matches){img.setAttribute('data-src','assets/mobile/ai-mobile-ratio.webp');}
           img.style.width = '100%';
           img.style.maxWidth = '100%';
           img.style.height = 'auto';
