@@ -306,6 +306,28 @@ body.content-mode .bottom-bar { display: flex; }
   .ux-board-preview { height:280px; }
 }
 
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(1){transform:translateX(-238px) translateY(-115px) rotate(-32deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(2){transform:translateX(-118px) translateY(-164px) rotate(-17deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(3){transform:translateX(8px) translateY(-144px) rotate(3deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(4){transform:translateX(128px) translateY(-183px) rotate(13deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(5){transform:translateX(244px) translateY(-119px) rotate(33deg)}
+@media(max-width:768px){
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(1){transform:translateX(-182px) translateY(-91px) rotate(-32deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(2){transform:translateX(-88px) translateY(-128px) rotate(-17deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(3){transform:translateX(6px) translateY(-112px) rotate(3deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(4){transform:translateX(94px) translateY(-143px) rotate(13deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(5){transform:translateX(186px) translateY(-95px) rotate(33deg)}
+}
+@media(max-width:560px){
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(1){transform:translateX(-110px) translateY(-75px) rotate(-29deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(2){transform:translateX(-56px) translateY(-112px) rotate(-16deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(3){transform:translateX(3px) translateY(-96px) rotate(3deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(4){transform:translateX(59px) translateY(-123px) rotate(13deg)}
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(5){transform:translateX(113px) translateY(-76px) rotate(30deg)}
+}
+#gallery-ui,#gallery-refactor { gap:0; }
+#gallery-ui .art,#gallery-refactor .art { border-radius:0; box-shadow:none; animation:none; }
+
 /* 首次加载进度 */
 body.is-loading { overflow: hidden; }
 .page-loader { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 24px; background: #fafbfc; transition: opacity .3s ease; }
@@ -441,6 +463,8 @@ var DATA = {"images":{"resume":["assets/resume/企业微信截图_17916109822899
 
 DATA.images.resume = ["assets/resume/resume-preview.webp"];
 DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
+DATA.images.ui = Array.from({length:10}, function(_,i){return 'assets/mobile/ui-part-' + String(i+1).padStart(2,'0') + '.webp';});
+DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobile/refactor-part-' + String(i+1).padStart(2,'0') + '.webp';});
 
 (function () {
   var VIEWS = ['resume', 'ui', 'ux', 'refactor', 'ai'];
@@ -480,8 +504,19 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
     for (var i = 0; i < images.length; i++) {
       images[i].loading = 'eager';
       var pending = images[i].getAttribute('data-src');
-      if (pending) { images[i].removeAttribute('data-src'); images[i].src = pending; }
+      if (pending) {
+        if (i === 0 || !window.IntersectionObserver) { startImage(images[i]); }
+        else { imageObserver.observe(images[i]); }
+      }
     }
+  }
+  var imageObserver = window.IntersectionObserver ? new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){if(entry.isIntersecting){startImage(entry.target);imageObserver.unobserve(entry.target);}});
+  },{rootMargin:'600px'}) : null;
+  function startImage(img) {
+    var source=img.getAttribute('data-src'); if(!source)return;
+    img.removeAttribute('data-src'); img.src=source;
+    if(img._startTimer) img._startTimer();
   }
 
   function showHome() {
@@ -562,11 +597,14 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
         var art = document.createElement('a');
         art.className = 'art';
         art.href = src; art.target = '_blank'; art.rel = 'noopener';
+        if(containerId === 'gallery-ui' || containerId === 'gallery-refactor') {
+          art.addEventListener('click',function(e){e.preventDefault();openViewer(src,'作品详情',containerId.replace('gallery-',''));});
+        }
         if (containerId === 'gallery-resume') {
-          art.href = 'assets/resume/resume.svg';
+          art.href = 'assets/resume/resume-complete.svg';
           art.addEventListener('click', function (e) {
             e.preventDefault();
-            openViewer('assets/resume/resume.svg', '简历', 'resume');
+            openViewer('assets/resume/resume-complete.svg', '简历', 'resume');
           });
         } else if (containerId === 'gallery-ai') {
           art.href = 'assets/ai/ai-project-hd.svg';
@@ -592,14 +630,18 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
         status.className = 'image-load-status';
         status.textContent = '正在加载作品图片…';
         art.appendChild(status);
-        img.onload = function () { status.style.display = 'none'; art.classList.remove('is-pending'); };
-        img.onerror = function () {
+        var waitTimer;
+        img._startTimer = function(){clearTimeout(waitTimer);waitTimer=setTimeout(function(){if(!img.complete || !img.naturalWidth)showRetry('加载较慢，请重新加载');},20000);};
+        img.onload = function () { clearTimeout(waitTimer);status.style.display = 'none'; art.classList.remove('is-pending'); };
+        function showRetry(message) {
+          clearTimeout(waitTimer);
           status.style.display = 'block';
-          status.innerHTML = '图片加载失败，请重试<br><br>';
+          status.innerHTML = message + '<br><br>';
           var retry = document.createElement('button'); retry.type = 'button'; retry.textContent = '重新加载';
-          retry.onclick = function (e) { e.preventDefault(); e.stopPropagation(); status.textContent = '正在重新加载…'; img.src = src + (src.indexOf('?') >= 0 ? '&' : '?') + 'retry=' + Date.now(); };
+          retry.onclick = function (e) { e.preventDefault(); e.stopPropagation(); status.textContent = '正在重新加载…'; img.src = src + (src.indexOf('?') >= 0 ? '&' : '?') + 'retry=' + Date.now(); img._startTimer(); };
           status.appendChild(retry);
-        };
+        }
+        img.onerror = function(){showRetry('图片加载失败，请重试');};
         art.appendChild(img);
         box.appendChild(art);
       })(items[i]);
@@ -641,6 +683,8 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
   var viewerNext = document.getElementById('viewerNext');
   var viewerBack = document.getElementById('viewerBack');
   var viewerZoom = 1;
+  var viewerWaitTimer;
+  var viewerStatus = document.createElement('div'); viewerStatus.className='image-load-status'; viewerCanvas.insertBefore(viewerStatus,viewerImage);
   var viewerItems = [], viewerIndex = 0, viewerReturnView = 'ux';
   function applyViewerZoom() { viewerImage.style.width = Math.max(80, Math.round(viewerImage.naturalWidth * viewerZoom)) + 'px'; }
   function fitViewer() { if (!viewerImage.naturalWidth) return; viewerZoom = Math.min(1, (viewerCanvas.clientWidth - 28) / viewerImage.naturalWidth); applyViewerZoom(); viewerCanvas.scrollTo(0,0); }
@@ -649,8 +693,13 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
     var item = currentViewerItem();
     var src = item.full || item.src;
     viewerTitle.textContent = item.name || '高清作品图';
+    clearTimeout(viewerWaitTimer);
+    viewerStatus.style.display='block'; viewerStatus.textContent='正在加载高清图片…';
     viewerImage.removeAttribute('src');
-    viewerImage.onload = fitViewer;
+    viewerImage.onload = function(){clearTimeout(viewerWaitTimer);viewerStatus.style.display='none';fitViewer();};
+    function retryViewer(){viewerStatus.innerHTML='加载较慢或失败，请重试<br><br>';var b=document.createElement('button');b.type='button';b.textContent='重新加载';b.onclick=loadViewerItem;viewerStatus.appendChild(b);}
+    viewerImage.onerror = function(){clearTimeout(viewerWaitTimer);retryViewer();};
+    viewerWaitTimer=setTimeout(retryViewer,20000);
     viewerImage.src = src;
     viewerPrev.disabled = viewerItems.length < 2;
     viewerNext.disabled = viewerItems.length < 2;
@@ -668,7 +717,7 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
     viewerIndex = (viewerIndex + step + viewerItems.length) % viewerItems.length;
     loadViewerItem();
   }
-  function closeViewer() { if (viewer.open) viewer.close(); viewerImage.removeAttribute('src'); showView(viewerReturnView); }
+  function closeViewer() { clearTimeout(viewerWaitTimer); if (viewer.open) viewer.close(); viewerImage.removeAttribute('src'); showView(viewerReturnView); }
   viewerPrev.addEventListener('click', function(){ changeViewer(-1); });
   viewerNext.addEventListener('click', function(){ changeViewer(1); });
   viewerBack.addEventListener('click', closeViewer);
