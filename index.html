@@ -211,8 +211,9 @@ body.content-mode .hint-dots { display: none; }
   animation: rise 0.5s both; cursor: zoom-in;
 }
 .art img { display: block; width: 100%; height: auto; }
-#gallery-ai .art { max-width:100%; overflow:hidden; cursor:zoom-in; }
-#gallery-ai .art img { width:100%; max-width:100%; height:auto; }
+#gallery-ai { min-width:0; max-width:100%; }
+#gallery-ai .art { display:block; width:100%; min-width:0; max-width:100%; overflow:visible; cursor:zoom-in; }
+#gallery-ai .art img { width:100%!important; min-width:0!important; max-width:100%!important; height:auto!important; object-fit:contain; border-radius:18px; }
 .ai-description { background:#262626; color:#f3f4f6; padding:24px; border-radius:18px; }
 .ai-description h3 { font-size:26px; margin:0 0 14px; }
 .ai-description p { font-size:18px; line-height:1.9; margin:12px 0; }
@@ -564,6 +565,9 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
         var img = document.createElement('img');
         img.src = src; img.alt = '作品图';
         if (containerId === 'gallery-ai') {
+          img.style.width = '100%';
+          img.style.maxWidth = '100%';
+          img.style.height = 'auto';
           img.loading = 'eager';
           img.fetchPriority = 'high';
         } else {
