@@ -348,6 +348,12 @@ body.content-mode .bottom-bar { display: flex; }
 }
 @media(max-width:560px){.folder-hover-area:is(.hover,.expanded) .card:nth-child(4){transform:translateX(76px) translateY(-145px) rotate(16deg);z-index:6}}
 
+.native-stack{display:grid;gap:22px}.native-panel{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:30px;box-shadow:0 8px 24px #0f172a05}.native-panel h3,.native-document h3{color:#12203a;font-size:25px;line-height:1.4;margin:0 0 18px}.native-panel h4{font-size:19px;margin:24px 0 10px}.native-panel p,.native-panel li,.native-document p,.native-document li{font-size:18px;line-height:1.9;color:#334155}.native-panel p{margin:12px 0}.native-panel ul,.native-document ul{padding-left:24px}.native-panel li,.native-document li{margin:8px 0}
+.resume-facts{display:flex;flex-wrap:wrap;gap:12px 22px;font-size:18px;line-height:1.8}.resume-facts a{color:#2563eb;overflow-wrap:anywhere}.native-meta{color:#64748b!important}.native-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.native-grid section{background:#eff6ff;padding:20px;border-radius:12px}.native-grid h4{margin:0}.native-action,.native-original-btn{display:inline-block;border:0;border-radius:24px;padding:12px 20px;background:#2563eb;color:#fff;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.native-flow{list-style:none;padding:0;counter-reset:step}.native-flow li{padding:15px 18px;background:#eff6ff;border-radius:12px;margin:10px 0;counter-increment:step}.native-flow li::before{content:counter(step,decimal-leading-zero);font-weight:800;color:#2563eb;margin-right:12px}.design-original{margin-top:24px;border:1px solid #dbe5f0;border-radius:16px;background:#fff}.design-original summary{padding:18px 24px;font-size:18px;font-weight:700;color:#2563eb;cursor:pointer}.original-body{padding:0 20px 20px}
+.ux-native-cover{height:220px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:18px;background:linear-gradient(150deg,#eff6ff,#e0e7ff);color:#12203a;text-align:left}.ux-native-cover .board-num{font-size:32px;font-weight:800;color:#3b82f6}.ux-native-cover strong{font-size:18px;line-height:1.6}.ux-native-cover small{font-size:12px;color:#64748b;line-height:1.6}.native-document{max-width:980px;margin:0 auto;padding:32px;text-align:left;color:#334155;background:#fff;border-radius:18px}.native-document h2{font-size:36px;color:#12203a;line-height:1.3;margin:0 0 10px}.native-document section{margin:30px 0}.native-document button{margin-top:20px}.native-document p{margin:12px 0}
+@media(max-width:560px){.native-panel{padding:22px}.native-panel h3{font-size:23px}.native-grid{grid-template-columns:1fr}.native-document{padding:22px}.native-document h2{font-size:28px}.original-body{padding:0 10px 10px}.ux-native-cover{height:220px;padding:16px}}
+
 /* 首次加载进度 */
 body.is-loading { overflow: hidden; }
 .page-loader { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 24px; background: #fafbfc; transition: opacity .3s ease; }
@@ -417,7 +423,7 @@ body.is-loading { overflow: hidden; }
     <h1>简历</h1>
     <p class="lede">个人简历与作品总览。</p>
   </div>
-  <div class="block"><h2 class="block-title">🖼 简历</h2><div class="gallery" id="gallery-resume"></div></div>
+  <div class="block"><h2 class="block-title">🖼 简历</h2><div class="native-stack"><article class="native-panel"><h3>邱桐 · 交互设计师</h3><div class="resume-facts"><span>9 年工作经验</span><span>现居广州</span><span>籍贯辽宁</span><span>年龄 31</span><a href="tel:13478459064">13478459064</a><a href="mailto:944129184@qq.com">944129184@qq.com</a></div></article><article class="native-panel"><h3>个人优势</h3><ul><li>逻辑思维与审美能力：3 年视觉设计经验、5 年交互设计经验，具备 AI 工具使用经验。</li><li>协调与管理能力：实习生带教及管理、下游工作分配，协调各部门高效协作，把控成本与落地品质。</li><li>优化体验分析能力：代入用户思维，快速找出痛点并给出解决方案。</li><li>主动能动性：学习意愿较强，程序语言、AI 工作流、引擎等均有自主学习。</li></ul><p>AI 工具实践：韩国境内话费充值 App、景区抢票插件、UGUI 重构 skill 等。</p></article><article class="native-panel"><h3>腾讯凯博 · 高级交互设计师</h3><p class="native-meta">2021.09—至今</p><ul><li>需求前期研讨梳理、具体方案设计。</li><li>下游工作内容分配，包括程序、美术、文案。</li><li>协调各部门高效协作，把控成本与方案落地质量。</li><li>持续跟进产品，自主迭代优化，研究用户体验反馈。</li><li>与腾讯生态部门配合工作，汇报对接。</li><li>实习生带教管理、规范制定、资源管理。</li><li>负责界面重构、多语言维护等落地工作。</li></ul><h4>业绩</h4><ul><li>前期独自搭建交互规范与交互工作流。</li><li>带教和管理实习生，统计排期、制定工作规范并验收规范等工作。</li></ul></article><article class="native-panel"><h3>星辉娱乐 · 高级 UI 设计师</h3><p class="native-meta">2021.05—2021.09</p><ul><li>参与修改视觉规范。</li><li>Unity 界面重构。</li><li>分析反馈意见，找出痛点并修复 bug。</li><li>日常 UI 界面设计。</li><li>产出下游需求文档。</li></ul></article><article class="native-panel"><h3>君海网络 · UI 设计师</h3><p class="native-meta">2019.02—2021.04</p><ul><li>两款 SLG 游戏的 UI 界面制作。</li><li>对接外包人员，验收并提出反馈修改意见。</li><li>迭代与管理项目视觉规范。</li><li>提下游需求文档，跟进并验收落地效果。</li><li>全程参与从立项至上线的视觉工作。</li></ul><h4>业绩</h4><ul><li>首个项目立项前期，独立完成风格指定与规范把控。</li><li>独立对接外包人员。</li><li>后期同时参与两个不同风格项目的视觉制作。</li></ul></article><article class="native-panel"><h3>专业技能</h3><ul><li>熟练运用 AI 工具、PS、Figma、XD、Unity 引擎及 Office 办公软件。</li><li>熟悉游戏产品各模块开发流程。</li><li>具备沟通与共情能力，能高效协调工作。</li><li>高精力、抗压能力与自驱力。</li></ul></article><article class="native-panel"><h3>教育经历</h3><p>本科 · 服装设计与工程 · 2013—2017</p><p>学习内容包括艺术设计与工业设计，以及工程相关内容。</p></article><article class="native-panel"><h3>其他经历与兴趣</h3><ul><li>校学生会：舞蹈团副团长。</li><li>学院学生会：社联办公室副主席。</li><li>公司年会：主持人、舞蹈表演等。</li></ul><p>手游桌游、游戏、逻辑推理辩论、运动健身、旅行、唱歌跳舞、装修护肤等。</p></article></div><details class="design-original"><summary>查看原版简历设计稿</summary><div class="original-body"><div class="gallery" id="gallery-resume"></div></div></details></div>
   <div class="block"><h2 class="block-title">🎮 过往游戏经历</h2><div class="game-history"><table><thead><tr><th scope="col">游戏名称</th><th scope="col">平台</th><th scope="col">类型</th><th scope="col">时长</th><th scope="col">成就</th><th scope="col">付费经历</th><th scope="col">体验与理解</th></tr></thead><tbody><tr><td data-label="游戏名称">超级玛丽、魂斗罗等</td><td data-label="平台">主机（FC）</td><td data-label="类型">动作（平台跳跃/射击）</td><td data-label="时长">30h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">靠跳跃、走位和攻击时机闯关，乐趣在于摸清关卡后越打越熟。</td></tr><tr><td data-label="游戏名称">大厦管理者等小游戏</td><td data-label="平台">PC</td><td data-label="类型">模拟经营</td><td data-label="时长">30h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">安排楼层、经营店铺，用赚来的钱扩建，乐趣是把小楼一步步做大。</td></tr><tr><td data-label="游戏名称">仙剑3</td><td data-label="平台">PC</td><td data-label="类型">角色扮演（RPG）</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">用探索和回合战斗推进故事，像看电视剧一样，最打动我的是人物之间的情义与取舍。</td></tr><tr><td data-label="游戏名称">剑侠情缘</td><td data-label="平台">PC</td><td data-label="类型">角色扮演（RPG）</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">—</td></tr><tr><td data-label="游戏名称">QQ音速&amp;炫舞</td><td data-label="平台">PC</td><td data-label="类型">音乐舞蹈</td><td data-label="时长">50h</td><td data-label="成就">可挑战最高星歌曲</td><td data-label="付费经历">—</td><td data-label="体验与理解">跟着音乐练节奏和操作，成绩带来成就感，非主流年代喜欢游戏里面的着装发型，一边扮演潮人一边听歌，好友互动让人愿意常玩。</td></tr><tr><td data-label="游戏名称">QQ农场&amp;抢车位</td><td data-label="平台">PC</td><td data-label="类型">社交休闲</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">用种菜、停车这些小事串起好友互动，收获和互相捣乱都让人惦记。</td></tr><tr><td data-label="游戏名称">穿越火线（CF）</td><td data-label="平台">PC</td><td data-label="类型">射击（FPS）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">枪法是基础，地图理解、交火时机和队友配合决定能否赢下对局。</td></tr><tr><td data-label="游戏名称">模拟人生3&amp;4</td><td data-label="平台">PC</td><td data-label="类型">模拟经营</td><td data-label="时长">200h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">从建房到安排人物生活，自己设定目标，也接受意料之外的人生发展。</td></tr><tr><td data-label="游戏名称">Dark Lands（黑暗领地）</td><td data-label="平台">手机</td><td data-label="类型">横版动作</td><td data-label="时长">30h</td><td data-label="成就">通关</td><td data-label="付费经历">—</td><td data-label="体验与理解">在跑酷中穿插战斗，判断障碍和出手时机，在连续闯关中练熟操作。</td></tr><tr><td data-label="游戏名称">狼人杀</td><td data-label="平台">手机</td><td data-label="类型">社交推理</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">从发言和投票中找矛盾，既要判断别人，也要让自己的说法站得住，这种语言表达逻辑推理类游戏十分烧脑上头。</td></tr><tr><td data-label="游戏名称">全民超神</td><td data-label="平台">手机</td><td data-label="类型">MOBA</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">王者荣耀版本前瞻，出自同一个工作室，但是英雄是养成类的，对新手不友好，后期养成后英雄数值爆炸，很难匹配到对手了，个别无敌英雄必须要付费买，匹配到了就无解，这个体验的短板很明显</td></tr><tr><td data-label="游戏名称">王者荣耀</td><td data-label="平台">手机</td><td data-label="类型">MOBA</td><td data-label="时长">500h</td><td data-label="成就">孙膑、庄周、蔡文姬 大连排名上榜</td><td data-label="付费经历">—</td><td data-label="体验与理解">个人操作最终要服务于团队节奏，数值平衡得很好，皮肤资源也多，零氪玩家也能一直玩</td></tr><tr><td data-label="游戏名称">和平精英</td><td data-label="平台">手机</td><td data-label="类型">射击（大逃杀）</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">代入感非常强的大逃杀游戏，玩法不罗嗦，搜集物资只是起步，关键是根据圈形、位置和信息判断何时打、何时走。</td></tr><tr><td data-label="游戏名称">Monument Valley（纪念碑谷）</td><td data-label="平台">手机</td><td data-label="类型">解谜</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">—</td><td data-label="体验与理解">转动建筑、改变视角，让看似断开的路连起来，解谜靠打破空间直觉。</td></tr><tr><td data-label="游戏名称">君临天下</td><td data-label="平台">手机</td><td data-label="类型">策略（SLG）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">比较早的COClike，在部落冲突的基础上武将培养更丰富</td></tr><tr><td data-label="游戏名称">部落冲突</td><td data-label="平台">手机</td><td data-label="类型">策略（SLG）</td><td data-label="时长">100h</td><td data-label="成就">主堡满级</td><td data-label="付费经历">—</td><td data-label="体验与理解">风格独特突出，建筑特点鲜明，玩法不罗嗦（腾讯接手前），爽感快速强烈，守家靠阵型，进攻靠配兵和下兵时机，抢来的资源又用于强化基地。</td></tr><tr><td data-label="游戏名称">重返帝国</td><td data-label="平台">手机</td><td data-label="类型">策略（SLG）</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">自由行军不走格子，团战跳堡打游击非常爽，写实画风精美，经营领地积累实力，再靠自由行军、兵种搭配和联盟协作争夺战场主动权。</td></tr><tr><td data-label="游戏名称">女神异闻录（P5R）</td><td data-label="平台">主机（Switch）</td><td data-label="类型">角色扮演（RPG）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">UI交互的代入感极强，在日常交往与迷宫攻略之间分配时间，人际关系的积累也会转化为战斗优势，剧本节奏好，在此类游戏里自由度算是非常高的，支线任务多，很上头</td></tr><tr><td data-label="游戏名称">双人成行</td><td data-label="平台">主机（PS4）</td><td data-label="类型">动作冒险（双人合作）</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">第一次玩双人配合的游戏就遇到这么夯的，两人的能力互相补足，关卡不断换玩法，难度适中，节奏适中，画风精美独特，地图代入感强，当时玩的是手柄，感觉关卡把手柄交互设计发挥到了极致</td></tr><tr><td data-label="游戏名称">刺客信条</td><td data-label="平台">主机（PS4）</td><td data-label="类型">动作冒险</td><td data-label="时长">200h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">俗称地图模拟器。深度玩了起源，奥德赛，在历史场景中攀爬、潜行和刺杀，自由度比较高，同时任务指引做的好，永远不会丢任务</td></tr><tr><td data-label="游戏名称">光遇</td><td data-label="平台">手机</td><td data-label="类型">社交冒险</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">画风治愈，玩法解压，用飞行和探索吸引人，再通过牵手、陪伴和互助建立与陌生人的联系。</td></tr><tr><td data-label="游戏名称">崩坏3</td><td data-label="平台">手机</td><td data-label="类型">动作RPG（ARPG）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">打击感非常棒，切换角色丝滑，媲美主机游戏，通过闪避、切人和连招打出配合，动作操作与角色养成共同决定战斗表现。</td></tr><tr><td data-label="游戏名称">节奏光剑</td><td data-label="平台">VR</td><td data-label="类型">音乐节奏（VR）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">游戏玩法单一但是可拓展很出圈，用挥剑和闪躲把音乐节拍变成身体动作，打得准、动作顺就是乐趣，顺便还能健身。自己玩是一种乐趣，看别人玩又是另一种乐趣</td></tr><tr><td data-label="游戏名称">塞尔达-旷野之息</td><td data-label="平台">主机（Switch）</td><td data-label="类型">动作冒险（开放世界）</td><td data-label="时长">200h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">塞尔达是天，自由度极高，关卡教学巧妙的融入到游戏里，不割裂，教学的节奏把控也好，不会觉得一下学太多或太少，好奇心带着探索，地形、天气和物理规则都能利用，同一难题可以有多种解法。神庙关卡设计也巧妙，即使玩到最后也能一直发现新东西</td></tr><tr><td data-label="游戏名称">超级马里奥-奥德赛</td><td data-label="平台">主机（Switch）</td><td data-label="类型">平台跳跃</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">童年的超级玛丽3DUltra版，有双人模式但十分鸡肋，一人就可以通关，用跳跃和附身能力探索场景，月亮藏在各种小挑战里，鼓励反复尝试，难度适中，反复刷的这个机制做的蛮好的，不会觉得强制或者厌倦</td></tr></tbody></table></div></div>
 </section>
 
@@ -427,7 +433,7 @@ body.is-loading { overflow: hidden; }
     <h1>UI 视觉</h1>
     <p class="lede">界面视觉设计作品。</p>
   </div>
-  <div class="block"><h2 class="block-title">🖼 图集</h2><div class="gallery" id="gallery-ui"></div></div>
+  <div class="block"><h2 class="block-title">设计案例</h2><div class="native-stack"><article class="native-panel"><h3>SLG 游戏 UI 设计</h3><p>界面视觉设计作品涵盖英雄信息、商店充值、派遣、竞技、联盟与排行榜等模块。</p><ul><li>英雄展示与养成：角色信息、数值属性及成长反馈。</li><li>运营与付费：充值、月卡、礼包、成长基金、活动奖励。</li><li>玩法与社交：竞技排名、联盟榜单、派遣入口与战报。</li></ul></article><article class="native-panel"><h3>游戏内功能与状态界面</h3><p>设计稿展示了不同功能的页面组织，以及操作前后、胜负、奖励、活动和任务等状态。</p><ul><li>战斗与反馈：胜利、结算、数据统计、进攻和防守日志。</li><li>活动与成长：爬塔战令、幸运翻牌、签到、基金与阶段奖励。</li><li>通用功能：邮件、充值、导航与返回操作。</li></ul></article><article class="native-panel"><h3>拾光梦行 · UI 界面设计</h3><p>作品包含剧情与日常任务、解忧杂货铺、手账、成就、每日登录福利以及纸船等界面。</p><p>完整视觉稿保留了页面的色彩、图形、角色和控件细节，可展开查看。</p></article></div><details class="design-original"><summary>展开 UI 设计图</summary><div class="original-body"><div class="gallery" id="gallery-ui"></div></div></details></div>
 </section>
 
 <section class="content-view" id="view-ux" data-key="ux">
@@ -457,7 +463,7 @@ body.is-loading { overflow: hidden; }
     <h1>规范&amp;重构</h1>
     <p class="lede">设计规范梳理与界面重构实践。</p>
   </div>
-  <div class="block"><h2 class="block-title">🖼 图集</h2><div class="gallery" id="gallery-refactor"></div></div>
+  <div class="block"><h2 class="block-title">工作方法与实践</h2><div class="native-stack"><article class="native-panel"><h3>UX 小组标准化工具</h3><div class="native-grid"><section><h4>基础 UI 控件规范</h4><p>规范控件标准，提升设计效率。</p></section><section><h4>UI 界面结构规范</h4><p>规范界面标准，统一设计文档。</p></section><section><h4>UI 工程制作规范</h4><p>规范 GUI 效果，提升重构效率。</p></section><section><h4>常用 UI 文档控件</h4><p>归类常用文档，提升沟通效率。</p></section></div></article><article class="native-panel"><h3>界面结构与横竖屏适配</h3><p>一级页签与返回等主要操作保持关联；二级页签跟随内容框架，用于内容切换。</p><ul><li>一级页签跟随返回操作的位置。</li><li>二级页签 A 跟随内容主体；二级页签 B 跟随第二阅读区域，两者属于同级分类。</li><li>横竖屏切换时，主要内容的阅读顺序与操作顺序保持清晰。</li><li>内容框架由横向组织调整为纵向组织时，主体内容按从上到下阅读。</li></ul></article><article class="native-panel"><h3>交互文档标准化</h3><p>规范细节流程，减少上下游沟通成本，强化设计质感。</p><ul><li>梳理设计目的、交互框架、效果图和相关功能。</li><li>记录功能状态、文本、数值、操作反馈与跳转关系。</li><li>标注美术、动效、音效与文案关注点。</li><li>通过示例和统一文档控件形成可复用的表达方式。</li></ul></article><article class="native-panel"><h3>公共组件与重构</h3><p>公共组件将项目的视觉与交互规范实体化为可复用零件，让规范从“靠人记”转变为“靠零件强制”。</p><ul><li>规范内建：协作收敛，新人也能产出合规界面。</li><li>保持一致性：公共修改在引用处生效。</li><li>拼装提速：把重复部分提前固化。</li><li>将适配成本前置，减少反复处理。</li></ul></article><article class="native-panel"><h3>AI 拼装工具探索</h3><p>将可总结、可约束的重复性界面拼接工作整理成 skill，通过实测迭代工具。</p><ul><li>FGUI：新项目，重点在原生控件、资源复用和界面构建。</li><li>UGUI：老项目，需要兼顾既有节点、脚本和横竖版切换。</li><li>公共预制体复用、工程资源和落地效果均需要核实。</li></ul></article><article class="native-panel"><h3>C2 界面拼装流水线</h3><p>将效果图垫底、调整节点、移除参考图等手工过程整理为可重放的工作流。</p><ul><li>结构与组件关系通过 Unity 读取，文本解析用于文件级信息。</li><li>同一预制体维护横版值和竖版适配数据，避免重复创建竖版替代项。</li><li>使用节点路径定位目标，降低手工定位成本。</li><li>保护公共预制体，先检查资源、适配和现有工程状态。</li></ul></article><article class="native-panel"><h3>FairyGUI 界面构建</h3><p>从活项目证据出发，使用项目原生组件、资源和控件契约构建界面，并通过工程工作流验证发布。</p><ul><li>先核实包清单、组件与当前资源，保留既有改动。</li><li>可交互元素使用真实原生控件；重复内容使用列表和 item 组件。</li><li>配置明确的水平与垂直关联，保持美术原始宽高比。</li><li>遵循字体族、字重、字号、颜色、描边和行高标注。</li><li>以版本化快照和实际截图记录质量与资源审计结果。</li></ul></article></div><details class="design-original"><summary>展开规范与重构设计稿</summary><div class="original-body"><div class="gallery" id="gallery-refactor"></div></div></details></div>
 </section>
 
 <section class="content-view" id="view-ai" data-key="ai">
@@ -466,9 +472,9 @@ body.is-loading { overflow: hidden; }
     <h1>AI</h1>
     <p class="lede">AI 相关探索与产出。</p>
   </div>
-  <div class="block"><h2 class="block-title">🖼 图集</h2>
-    <p class="ai-reading-hint">点击图稿进入大图阅读；电脑端按住 Ctrl 滚动鼠标滚轮可放大查看细节。</p>
-    <div class="gallery" id="gallery-ai"></div></div>
+  <div class="block"><h2 class="block-title">项目实践</h2>
+    <p class="ai-reading-hint">项目说明可直接阅读；展开设计稿后，点击图片查看细节。</p>
+    <div class="native-stack"><article class="native-panel"><h3>蜂巢 APP</h3><p>面向在韩务工人群，提供话费充值与流量套餐购买，并通过邀请好友返现形成裂变。</p><h4>功能</h4><ul><li>话费充值和流量套餐购买。</li><li>邀请好友返现与分享。</li><li>衍生社交功能，增强用户活跃度和留存。</li></ul><h4>设计与制作</h4><p>根据简易需求文档推进制作，在需求多次变化时反推上游。前端工作包含需求分析、交互流程、低保真 Demo 演示白盒和代码，完全非 AI 工具制作。</p><a class="native-action" href="https://dua-douya.github.io/fengchao/" target="_blank" rel="noopener">体验蜂巢 APP ↗</a></article><article class="native-panel"><h3>景区抢票插件</h3><p>针对德天瀑布景区国庆假期购票难的问题，减少余票出现后重新填写信息、提交订单的手速成本。</p><h4>功能结构</h4><ol class="native-flow"><li>运行基座：Tkinter GUI、一键启动、配置持久化与日志。</li><li>抢票引擎：API、哨兵与流程控制。</li><li>抢票策略：分单、日期时段组合、游客轮换与抢票数量。</li><li>提醒与支付：声音及弹窗提醒、付款倒计时和重复提醒。</li><li>监控与日志：状态栏、心跳与轮询日志。</li><li>使用文档：使用指南与冒烟检查脚本。</li></ol><p>作为挂机抢票工具，视觉设计以可用为主。全程由 AI 制作，最终成功抢到票。</p></article></div><details class="design-original"><summary>展开 AI 项目完整图稿</summary><div class="original-body"><div class="gallery" id="gallery-ai"></div></div></details></div>
 </section>
 
 <div class="bottom-bar">
@@ -485,6 +491,8 @@ DATA.images.resume = ["assets/resume/resume-preview.webp"];
 DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
 DATA.images.ui = Array.from({length:10}, function(_,i){return 'assets/mobile/ui-part-' + String(i+1).padStart(2,'0') + '.webp';});
 DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobile/refactor-part-' + String(i+1).padStart(2,'0') + '.webp';});
+
+DATA.uxBoards.forEach(function(item,i){item.doc=[{"title":"城建核心功能","intro":"龙石战争 · 核心界面设计展示 01","html":"<section><h3>功能背景</h3><p>主城建造是玩家的主要成长线，使用频率较高。升级主堡可解锁更多主城建筑，防御系统的建造也会影响防守属性。</p></section><section><h3>体验关注</h3><p>前期操作体验若出现卡顿，容易导致玩家流失。</p></section><section><h3>设计工作</h3><p>作为项目首位、前期唯一的交互设计人员，同时梳理多套系统需求，整理过程文档，并结合 C1、C2 实机效果检查落地。</p></section>"},{"title":"军团派遣优化","intro":"龙石战争 · 核心界面设计展示 02","html":"<section><h3>功能背景</h3><p>派遣是游戏内高频常规操作，贯穿资源获取、英雄升级、战力成长、玩家战斗与援防。</p></section><section><h3>问题</h3><p>功能不断增加后，附加设置平铺在页面中，信息杂乱；不同派遣场景的规则不统一，增加认知成本。</p></section><section><h3>优化目标</h3><p>突出派遣这一核心操作，同时清楚说明各个状态和不可派遣的原因。</p><ul><li>提升派遣操作效率。</li><li>降低认知负担，统一多场景 UI 规范。</li><li>支持赛季迭代扩展。</li></ul></section><section><h3>方案</h3><p>围绕信息层级、操作路径、状态反馈与视觉一致性调整。</p><ul><li>调整勾选、编辑等附加功能的显示规则。</li><li>增加折叠，简化界面。</li><li>调整预览行军路线与查看目标点的位置和逻辑。</li></ul></section>"},{"title":"联盟贸易派遣","intro":"联盟贸易派遣迭代 · 2024/08/30","html":"<section><h3>任务与刷新</h3><p>固定 3 个组队任务，鼓励分享；任务单个刷新，免费 1 次、付费 1 次，每 12 小时自动刷新。</p></section><section><h3>页签组织</h3><p>区分“我的任务”和“组队中的任务”。小队贸易区分“我的贸易”和“其他小队”，我的贸易再区分“我发起的”和“我参与的”。</p></section><section><h3>组队规则</h3><p>任务分享具有时效性。</p><ul><li>倒计时内满员自动出发，也可以提前解散。</li><li>倒计时结束自动出发，即使人数未满。</li><li>未出发时解散返还全部体力，并以邮件提示成员；出发后跳车不返还。</li><li>玩家可以主动提前出发。</li></ul></section><section><h3>操作与状态</h3><p>清晰表达当前条件完成度，减少组队与出发时的误解。</p><ul><li>显示条件满足数量，例如 24/30。</li><li>未满员时按钮命名为“提前出发”。</li><li>发起组队时可选择发送到联盟频道，默认选中。</li><li>保留常驻分享按钮；编辑上阵英雄的操作区域由下方调整到左侧。</li></ul></section>"},{"title":"英雄龙石培养","intro":"M12 功能修改","html":"<section><h3>槽位与套装</h3><p>取消两条槽位不可使用同种流派的限制；左右镶嵌内容可以重复。</p><ul><li>左侧三颗槽位固定部位，右侧两颗为通用槽位。</li><li>取消二件套，仅保留三件套。</li><li>槽位开启顺序可由玩家自定义，并告知当前可开启数量。</li></ul></section><section><h3>属性与特性</h3><p>副属性的附魔概念改为特性描述；数值固定，无需进度条。</p><ul><li>槽位升级只提升主属性，与副属性、特性无关。</li><li>总览列出所有生效特性，最多同时 5 个。</li><li>相同特性叠加层数，最多 5 层，显示总数值与叠加规则。</li></ul></section><section><h3>推荐与总览</h3><p>推荐弹窗按套装提供一套最佳方案，并与其余两颗组合为评分最高方案。总览提供属性、特性页签，默认属性页签；属性包括主属性、副属性与套装效果。</p></section>"},{"title":"侦察体验优化","intro":"根据当前版本优化","html":"<section><h3>修改目标</h3><p>侦察兵到达后停留更久，持续点亮目标区域，并在停留期间与盟友共享目标详情。</p></section><section><h3>结果反馈</h3><p>增加侦察失败概念，依据双方瞭望塔等级差表达成功与失败规则，梳理修改后的体验问题。</p></section><ol class=\"native-flow\"><li>选择目标 → 发起侦察 → 派遣斥候</li><li>前往目标：可取消，但不返还资源</li><li>到达目标：发送战报，反馈成功或失败</li><li>侦察成功：悬停点亮目标，盟友视野共享</li><li>倒计时结束自动返回；可提前手动返回；目标开启保护时立即返回</li></ol><section><h3>被侦察方反馈</h3><p>通过主界面图标、主城斥候模型动作、预警详情与邮件提示侦察状态。</p></section>"},{"title":"坐骑培育系统","intro":"C2 · 中长线成长与付费系统","html":"<section><h3>设计目的</h3><p>中后期解锁，以英雄为载体提供属性和稀有效果，关联战斗定位增强；保持既有流派构筑与相克关系。</p></section><section><h3>培育状态</h3><p>从英雄坐骑界面点击培育，进入系统并选中对应坐骑。界面分别表达不可培育、可培育与满阶状态。</p></section><section><h3>资源与列表</h3><p>除龙币、钻石外，展示所需培育道具；视觉上区分基础和高级道具。</p><ul><li>坐骑列表与英雄坐骑页保持一致。</li><li>显示佩戴者、培育等级、品质与图标。</li><li>列出拥有的坐骑，补充未穿戴优先于已穿戴的排序规则。</li></ul></section><section><h3>红点规则</h3><p>可提升的坐骑道具右上角提示红点，点击选中查看后隐藏，红点向英雄界面的坐骑列表传递。</p></section>"},{"title":"官职系统","intro":"C2 · 官职、威望与俸禄","html":"<section><h3>系统入口</h3><p>战力系统开放前，主界面显示官职名和威望值；开放后显示官职名和战力。</p></section><section><h3>个人与他人主页</h3><p>个人主页增加官职入口，显示当前官职；战力系统未开放时隐藏战力面板。他人主页显示对应官职名称。</p></section><section><h3>官职页面</h3><p>展示当前威望与威望排名；点击排名按钮跳转排行榜。</p></section><section><h3>俸禄反馈</h3><p>每日 00:00 可领取前日俸禄。</p><ul><li>达到领取时间显示可领取状态。</li><li>领取后显示已领取状态。</li><li>有可领取奖励时入口显示红点，进入领取后隐藏。</li></ul></section>"}][i];});
 
 (function () {
   var VIEWS = ['resume', 'ui', 'ux', 'refactor', 'ai'];
@@ -523,6 +531,8 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
     var images = section.querySelectorAll('img');
     for (var i = 0; i < images.length; i++) {
       images[i].loading = 'eager';
+      var detail = images[i].closest('details');
+      if(detail && !detail.open)continue;
       var pending = images[i].getAttribute('data-src');
       if (pending) {
         if (i === 0 || !window.IntersectionObserver) { startImage(images[i]); }
@@ -530,6 +540,7 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
       }
     }
   }
+  document.querySelectorAll('.design-original').forEach(function(detail){detail.addEventListener('toggle',function(){if(detail.open){loadViewImages(detail.closest('.content-view').getAttribute('data-key'));}});});
   var imageObserver = window.IntersectionObserver ? new IntersectionObserver(function(entries){
     entries.forEach(function(entry){if(entry.isIntersecting){startImage(entry.target);imageObserver.unobserve(entry.target);}});
   },{rootMargin:'150px'}) : null;
@@ -713,21 +724,31 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
   var viewerNext = document.getElementById('viewerNext');
   var viewerBack = document.getElementById('viewerBack');
   var viewerZoom = 1;
+  var viewerDocument = document.createElement('div');viewerDocument.className='native-document';viewerCanvas.insertBefore(viewerDocument,viewerImage);
   var viewerWaitTimer;
   var viewerStatus = document.createElement('div'); viewerStatus.className='image-load-status'; viewerCanvas.insertBefore(viewerStatus,viewerImage);
   var viewerItems = [], viewerIndex = 0, viewerReturnView = 'ux';
   function applyViewerZoom() { viewerImage.style.width = Math.max(80, Math.round(viewerImage.naturalWidth * viewerZoom)) + 'px'; }
   function fitViewer() { if (!viewerImage.naturalWidth) return; viewerZoom = Math.min(1, (viewerCanvas.clientWidth - 28) / viewerImage.naturalWidth); applyViewerZoom(); viewerCanvas.scrollTo(0,0); }
   function currentViewerItem() { return viewerItems[viewerIndex] || {}; }
-  function loadViewerItem() {
+  function loadViewerItem(readOriginal) {
     var item = currentViewerItem();
+    clearTimeout(viewerWaitTimer);
+    viewerDocument.style.display='none';viewerImage.style.display='block';
+    if(item.doc && readOriginal !== true){
+      viewerImage.style.display='none';viewerImage.removeAttribute('src');viewerStatus.style.display='none';
+      viewerTitle.textContent=item.doc.title;viewerDocument.style.display='block';
+      viewerDocument.innerHTML='<h2>'+item.doc.title+'</h2><p class="native-meta">'+item.doc.intro+'</p>'+item.doc.html;
+      var original=document.createElement('button');original.className='native-original-btn';original.textContent='查看完整设计稿';original.onclick=function(){loadViewerItem(true);};viewerDocument.appendChild(original);
+      viewerPrev.disabled=viewerItems.length<2;viewerNext.disabled=viewerItems.length<2;viewerCanvas.scrollTo(0,0);return;
+    }
     var src = item.full || item.src;
     viewerTitle.textContent = item.name || '高清作品图';
     clearTimeout(viewerWaitTimer);
     viewerStatus.style.display='block'; viewerStatus.textContent='正在加载高清图片…';
     viewerImage.removeAttribute('src');
     viewerImage.onload = function(){clearTimeout(viewerWaitTimer);viewerStatus.style.display='none';fitViewer();};
-    function retryViewer(){viewerStatus.innerHTML='加载较慢或失败，请重试<br><br>';var b=document.createElement('button');b.type='button';b.textContent='重新加载';b.onclick=loadViewerItem;viewerStatus.appendChild(b);}
+    function retryViewer(){viewerStatus.innerHTML='加载较慢或失败，请重试<br><br>';var b=document.createElement('button');b.type='button';b.textContent='重新加载';b.onclick=function(){loadViewerItem(true);};viewerStatus.appendChild(b);}
     viewerImage.onerror = function(){clearTimeout(viewerWaitTimer);retryViewer();};
     viewerWaitTimer=setTimeout(retryViewer,20000);
     viewerImage.src = src;
@@ -752,6 +773,7 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
   viewerNext.addEventListener('click', function(){ changeViewer(1); });
   viewerBack.addEventListener('click', closeViewer);
   viewerCanvas.addEventListener('wheel', function(e){
+    if(viewerImage.style.display==='none')return;
     if (!e.ctrlKey) return;
     e.preventDefault();
     viewerZoom = Math.max(.05, Math.min(4, viewerZoom * (e.deltaY < 0 ? 1.12 : .89)));
@@ -763,10 +785,10 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
     for (var i = 0; i < items.length; i++) {
       (function(item, idx){
         var card = document.createElement('button'); card.type='button'; card.className='ux-board-card';
-        var preview = document.createElement('div'); preview.className='ux-board-preview';
-        var img = document.createElement('img'); img.setAttribute('data-src',item.thumb); img.alt=item.name; img.loading='eager'; img.decoding='async';
-        var caption = document.createElement('div'); caption.className='ux-board-caption'; caption.innerHTML='<span>'+item.name+'</span><span>点击放大查看</span>';
-        preview.appendChild(img); card.appendChild(preview); card.appendChild(caption); box.appendChild(card);
+        var preview = document.createElement('div'); preview.className='ux-native-cover';
+        preview.innerHTML='<span class="board-num">'+String(idx+1).padStart(2,'0')+'</span><strong>'+item.doc.title+'</strong><small>交互设计 · 点击阅读</small>';
+        var caption = document.createElement('div'); caption.className='ux-board-caption'; caption.innerHTML='<span>'+item.name+'</span><span>点击阅读</span>';
+        card.appendChild(preview); card.appendChild(caption); box.appendChild(card);
         card.addEventListener('click', function(){ openViewer(item.full, item.name, 'ux', items, idx); });
       })(items[i], i);
     }
