@@ -211,6 +211,9 @@ body.content-mode .hint-dots { display: none; }
   animation: rise 0.5s both; cursor: zoom-in;
 }
 .art img { display: block; width: 100%; height: auto; }
+.image-load-status { display:block; padding:36px 16px; text-align:center; color:#64748b; font-size:16px; background:#eef2f7; }
+.image-load-status button { border:0; border-radius:20px; padding:10px 20px; color:#fff; background:#3b82f6; font:inherit; cursor:pointer; }
+.art.is-pending { min-height:140px; animation:none; }
 #gallery-ai { min-width:0; max-width:100%; }
 #gallery-ai .art { display:block; width:100%; min-width:0; max-width:100%; overflow:visible; cursor:zoom-in; }
 #gallery-ai .art img { width:100%!important; min-width:0!important; max-width:100%!important; height:auto!important; object-fit:contain; border-radius:18px; }
@@ -468,6 +471,17 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
     btnNext.textContent = VIEW_TITLES[nextKey] + ' ▶';
     btnNext.setAttribute('data-go', nextKey);
     scrollTop();
+    loadViewImages(key);
+  }
+
+  function loadViewImages(key) {
+    var section = document.getElementById('view-' + key);
+    var images = section.querySelectorAll('img');
+    for (var i = 0; i < images.length; i++) {
+      images[i].loading = 'eager';
+      var pending = images[i].getAttribute('data-src');
+      if (pending) { images[i].removeAttribute('data-src'); images[i].src = pending; }
+    }
   }
 
   function showHome() {
@@ -562,7 +576,7 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
           });
         }
         var img = document.createElement('img');
-        img.src = src; img.alt = '作品图';
+        img.setAttribute('data-src', src); img.alt = '作品图';
         if (containerId === 'gallery-ai') {
           img.style.width = '100%';
           img.style.maxWidth = '100%';
@@ -573,7 +587,19 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
           img.loading = 'lazy';
         }
         img.decoding = 'async';
-        img.onerror = function () { art.innerHTML = '<p style="color:#94a3b8;font-size:14px;text-align:center;padding:60px 0;">图片未找到</p>'; };
+        art.classList.add('is-pending');
+        var status = document.createElement('span');
+        status.className = 'image-load-status';
+        status.textContent = '正在加载作品图片…';
+        art.appendChild(status);
+        img.onload = function () { status.style.display = 'none'; art.classList.remove('is-pending'); };
+        img.onerror = function () {
+          status.style.display = 'block';
+          status.innerHTML = '图片加载失败，请重试<br><br>';
+          var retry = document.createElement('button'); retry.type = 'button'; retry.textContent = '重新加载';
+          retry.onclick = function (e) { e.preventDefault(); e.stopPropagation(); status.textContent = '正在重新加载…'; img.src = src + (src.indexOf('?') >= 0 ? '&' : '?') + 'retry=' + Date.now(); };
+          status.appendChild(retry);
+        };
         art.appendChild(img);
         box.appendChild(art);
       })(items[i]);
@@ -660,7 +686,7 @@ DATA.images.ai = ["assets/ai/ai-project-hd.svg"];
       (function(item, idx){
         var card = document.createElement('button'); card.type='button'; card.className='ux-board-card';
         var preview = document.createElement('div'); preview.className='ux-board-preview';
-        var img = document.createElement('img'); img.src=item.thumb; img.alt=item.name; img.loading='lazy'; img.decoding='async';
+        var img = document.createElement('img'); img.setAttribute('data-src',item.thumb); img.alt=item.name; img.loading='eager'; img.decoding='async';
         var caption = document.createElement('div'); caption.className='ux-board-caption'; caption.innerHTML='<span>'+item.name+'</span><span>点击放大查看</span>';
         preview.appendChild(img); card.appendChild(preview); card.appendChild(caption); box.appendChild(card);
         card.addEventListener('click', function(){ openViewer(item.full, item.name, 'ux', items, idx); });
