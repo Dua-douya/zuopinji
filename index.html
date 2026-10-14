@@ -328,6 +328,26 @@ body.content-mode .bottom-bar { display: flex; }
 #gallery-ui,#gallery-refactor { gap:0; }
 #gallery-ui .art,#gallery-refactor .art { border-radius:0; box-shadow:none; animation:none; }
 
+.game-history { width:100%; min-width:0; }
+.game-history table { width:100%; table-layout:fixed; border-collapse:collapse; font-size:17px; line-height:1.75; background:#fff; }
+.game-history th { background:#2563eb; color:#fff; padding:16px 10px; text-align:left; }
+.game-history td { padding:18px 10px; border-bottom:1px solid #dbe5f0; vertical-align:top; overflow-wrap:anywhere; }
+.game-history th:first-child { width:15%; }.game-history th:nth-child(2){width:7%}.game-history th:nth-child(3){width:12%}.game-history th:nth-child(4){width:6%}.game-history th:nth-child(5){width:10%}.game-history th:nth-child(6){width:11%}
+.game-history tbody tr:nth-child(even){background:#eff6ff}
+@media(max-width:820px){
+.game-history table,.game-history tbody { display:block; }
+.game-history thead { display:none; }
+.game-history tr { display:block; margin:0 0 18px; padding:20px; border:1px solid #dbe5f0; border-radius:16px; box-shadow:0 5px 20px #0f172a08; }
+.game-history td { display:grid; grid-template-columns:76px minmax(0,1fr); gap:10px; padding:8px 0; border:0; font-size:18px; line-height:1.75; }
+.game-history td::before { content:attr(data-label); color:#64748b; font-size:16px; }
+.game-history td:first-child { display:block; font-size:22px; font-weight:800; color:#12203a; border-bottom:1px solid #dbe5f0; padding:0 0 12px; margin-bottom:8px; }
+.game-history td:first-child::before { display:none; }
+.game-history td:last-child { display:block; border-top:1px solid #dbe5f0; margin-top:8px; padding-top:12px; }
+.game-history td:last-child::before { display:block; margin-bottom:5px; }
+.folder-hover-area:is(.hover,.expanded) .card:nth-child(4){transform:translateX(105px) translateY(-158px) rotate(16deg);z-index:6}
+}
+@media(max-width:560px){.folder-hover-area:is(.hover,.expanded) .card:nth-child(4){transform:translateX(76px) translateY(-145px) rotate(16deg);z-index:6}}
+
 /* 首次加载进度 */
 body.is-loading { overflow: hidden; }
 .page-loader { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 24px; background: #fafbfc; transition: opacity .3s ease; }
@@ -398,7 +418,7 @@ body.is-loading { overflow: hidden; }
     <p class="lede">个人简历与作品总览。</p>
   </div>
   <div class="block"><h2 class="block-title">🖼 简历</h2><div class="gallery" id="gallery-resume"></div></div>
-  <div class="block"><h2 class="block-title">🎮 过往游戏经历</h2><div class="gallery"><button type="button" class="art resume-table-card" data-full="assets/resume/game-history.svg" data-title="过往游戏经历"><img src="assets/resume/game-history.svg" alt="过往游戏经历表"></button></div></div>
+  <div class="block"><h2 class="block-title">🎮 过往游戏经历</h2><div class="game-history"><table><thead><tr><th scope="col">游戏名称</th><th scope="col">平台</th><th scope="col">类型</th><th scope="col">时长</th><th scope="col">成就</th><th scope="col">付费经历</th><th scope="col">体验与理解</th></tr></thead><tbody><tr><td data-label="游戏名称">超级玛丽、魂斗罗等</td><td data-label="平台">主机（FC）</td><td data-label="类型">动作（平台跳跃/射击）</td><td data-label="时长">30h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">靠跳跃、走位和攻击时机闯关，乐趣在于摸清关卡后越打越熟。</td></tr><tr><td data-label="游戏名称">大厦管理者等小游戏</td><td data-label="平台">PC</td><td data-label="类型">模拟经营</td><td data-label="时长">30h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">安排楼层、经营店铺，用赚来的钱扩建，乐趣是把小楼一步步做大。</td></tr><tr><td data-label="游戏名称">仙剑3</td><td data-label="平台">PC</td><td data-label="类型">角色扮演（RPG）</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">用探索和回合战斗推进故事，像看电视剧一样，最打动我的是人物之间的情义与取舍。</td></tr><tr><td data-label="游戏名称">剑侠情缘</td><td data-label="平台">PC</td><td data-label="类型">角色扮演（RPG）</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">—</td></tr><tr><td data-label="游戏名称">QQ音速&amp;炫舞</td><td data-label="平台">PC</td><td data-label="类型">音乐舞蹈</td><td data-label="时长">50h</td><td data-label="成就">可挑战最高星歌曲</td><td data-label="付费经历">—</td><td data-label="体验与理解">跟着音乐练节奏和操作，成绩带来成就感，非主流年代喜欢游戏里面的着装发型，一边扮演潮人一边听歌，好友互动让人愿意常玩。</td></tr><tr><td data-label="游戏名称">QQ农场&amp;抢车位</td><td data-label="平台">PC</td><td data-label="类型">社交休闲</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">用种菜、停车这些小事串起好友互动，收获和互相捣乱都让人惦记。</td></tr><tr><td data-label="游戏名称">穿越火线（CF）</td><td data-label="平台">PC</td><td data-label="类型">射击（FPS）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">枪法是基础，地图理解、交火时机和队友配合决定能否赢下对局。</td></tr><tr><td data-label="游戏名称">模拟人生3&amp;4</td><td data-label="平台">PC</td><td data-label="类型">模拟经营</td><td data-label="时长">200h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">从建房到安排人物生活，自己设定目标，也接受意料之外的人生发展。</td></tr><tr><td data-label="游戏名称">Dark Lands（黑暗领地）</td><td data-label="平台">手机</td><td data-label="类型">横版动作</td><td data-label="时长">30h</td><td data-label="成就">通关</td><td data-label="付费经历">—</td><td data-label="体验与理解">在跑酷中穿插战斗，判断障碍和出手时机，在连续闯关中练熟操作。</td></tr><tr><td data-label="游戏名称">狼人杀</td><td data-label="平台">手机</td><td data-label="类型">社交推理</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">从发言和投票中找矛盾，既要判断别人，也要让自己的说法站得住，这种语言表达逻辑推理类游戏十分烧脑上头。</td></tr><tr><td data-label="游戏名称">全民超神</td><td data-label="平台">手机</td><td data-label="类型">MOBA</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">王者荣耀版本前瞻，出自同一个工作室，但是英雄是养成类的，对新手不友好，后期养成后英雄数值爆炸，很难匹配到对手了，个别无敌英雄必须要付费买，匹配到了就无解，这个体验的短板很明显</td></tr><tr><td data-label="游戏名称">王者荣耀</td><td data-label="平台">手机</td><td data-label="类型">MOBA</td><td data-label="时长">500h</td><td data-label="成就">孙膑、庄周、蔡文姬 大连排名上榜</td><td data-label="付费经历">—</td><td data-label="体验与理解">个人操作最终要服务于团队节奏，数值平衡得很好，皮肤资源也多，零氪玩家也能一直玩</td></tr><tr><td data-label="游戏名称">和平精英</td><td data-label="平台">手机</td><td data-label="类型">射击（大逃杀）</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">代入感非常强的大逃杀游戏，玩法不罗嗦，搜集物资只是起步，关键是根据圈形、位置和信息判断何时打、何时走。</td></tr><tr><td data-label="游戏名称">Monument Valley（纪念碑谷）</td><td data-label="平台">手机</td><td data-label="类型">解谜</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">—</td><td data-label="体验与理解">转动建筑、改变视角，让看似断开的路连起来，解谜靠打破空间直觉。</td></tr><tr><td data-label="游戏名称">君临天下</td><td data-label="平台">手机</td><td data-label="类型">策略（SLG）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">比较早的COClike，在部落冲突的基础上武将培养更丰富</td></tr><tr><td data-label="游戏名称">部落冲突</td><td data-label="平台">手机</td><td data-label="类型">策略（SLG）</td><td data-label="时长">100h</td><td data-label="成就">主堡满级</td><td data-label="付费经历">—</td><td data-label="体验与理解">风格独特突出，建筑特点鲜明，玩法不罗嗦（腾讯接手前），爽感快速强烈，守家靠阵型，进攻靠配兵和下兵时机，抢来的资源又用于强化基地。</td></tr><tr><td data-label="游戏名称">重返帝国</td><td data-label="平台">手机</td><td data-label="类型">策略（SLG）</td><td data-label="时长">100h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">自由行军不走格子，团战跳堡打游击非常爽，写实画风精美，经营领地积累实力，再靠自由行军、兵种搭配和联盟协作争夺战场主动权。</td></tr><tr><td data-label="游戏名称">女神异闻录（P5R）</td><td data-label="平台">主机（Switch）</td><td data-label="类型">角色扮演（RPG）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">UI交互的代入感极强，在日常交往与迷宫攻略之间分配时间，人际关系的积累也会转化为战斗优势，剧本节奏好，在此类游戏里自由度算是非常高的，支线任务多，很上头</td></tr><tr><td data-label="游戏名称">双人成行</td><td data-label="平台">主机（PS4）</td><td data-label="类型">动作冒险（双人合作）</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">第一次玩双人配合的游戏就遇到这么夯的，两人的能力互相补足，关卡不断换玩法，难度适中，节奏适中，画风精美独特，地图代入感强，当时玩的是手柄，感觉关卡把手柄交互设计发挥到了极致</td></tr><tr><td data-label="游戏名称">刺客信条</td><td data-label="平台">主机（PS4）</td><td data-label="类型">动作冒险</td><td data-label="时长">200h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">俗称地图模拟器。深度玩了起源，奥德赛，在历史场景中攀爬、潜行和刺杀，自由度比较高，同时任务指引做的好，永远不会丢任务</td></tr><tr><td data-label="游戏名称">光遇</td><td data-label="平台">手机</td><td data-label="类型">社交冒险</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">画风治愈，玩法解压，用飞行和探索吸引人，再通过牵手、陪伴和互助建立与陌生人的联系。</td></tr><tr><td data-label="游戏名称">崩坏3</td><td data-label="平台">手机</td><td data-label="类型">动作RPG（ARPG）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">—</td><td data-label="体验与理解">打击感非常棒，切换角色丝滑，媲美主机游戏，通过闪避、切人和连招打出配合，动作操作与角色养成共同决定战斗表现。</td></tr><tr><td data-label="游戏名称">节奏光剑</td><td data-label="平台">VR</td><td data-label="类型">音乐节奏（VR）</td><td data-label="时长">50h</td><td data-label="成就">—</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">游戏玩法单一但是可拓展很出圈，用挥剑和闪躲把音乐节拍变成身体动作，打得准、动作顺就是乐趣，顺便还能健身。自己玩是一种乐趣，看别人玩又是另一种乐趣</td></tr><tr><td data-label="游戏名称">塞尔达-旷野之息</td><td data-label="平台">主机（Switch）</td><td data-label="类型">动作冒险（开放世界）</td><td data-label="时长">200h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">塞尔达是天，自由度极高，关卡教学巧妙的融入到游戏里，不割裂，教学的节奏把控也好，不会觉得一下学太多或太少，好奇心带着探索，地形、天气和物理规则都能利用，同一难题可以有多种解法。神庙关卡设计也巧妙，即使玩到最后也能一直发现新东西</td></tr><tr><td data-label="游戏名称">超级马里奥-奥德赛</td><td data-label="平台">主机（Switch）</td><td data-label="类型">平台跳跃</td><td data-label="时长">50h</td><td data-label="成就">通关</td><td data-label="付费经历">一次性付费</td><td data-label="体验与理解">童年的超级玛丽3DUltra版，有双人模式但十分鸡肋，一人就可以通关，用跳跃和附身能力探索场景，月亮藏在各种小挑战里，鼓励反复尝试，难度适中，反复刷的这个机制做的蛮好的，不会觉得强制或者厌倦</td></tr></tbody></table></div></div>
 </section>
 
 <section class="content-view" id="view-ui" data-key="ui">
@@ -512,10 +532,12 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
   }
   var imageObserver = window.IntersectionObserver ? new IntersectionObserver(function(entries){
     entries.forEach(function(entry){if(entry.isIntersecting){startImage(entry.target);imageObserver.unobserve(entry.target);}});
-  },{rootMargin:'600px'}) : null;
+  },{rootMargin:'150px'}) : null;
   function startImage(img) {
     var source=img.getAttribute('data-src'); if(!source)return;
-    img.removeAttribute('data-src'); img.src=source;
+    img.removeAttribute('data-src');
+    if(img.getAttribute('data-srcset')){img.srcset=img.getAttribute('data-srcset');img.removeAttribute('data-srcset');}
+    img.src=source;
     if(img._startTimer) img._startTimer();
   }
 
@@ -615,7 +637,15 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
         }
         var img = document.createElement('img');
         img.setAttribute('data-src', src); img.alt = '作品图';
+        if(containerId==='gallery-ui' || containerId==='gallery-refactor'){
+          img.width=2276; img.height=3200;
+          if(containerId==='gallery-ui' && /part-10/.test(src))img.height=2612;
+          if(containerId==='gallery-refactor' && /part-07/.test(src))img.height=1648;
+          img.setAttribute('data-srcset',src.replace('.webp','-phone.webp') + ' 1170w, ' + src + ' 2276w');
+          img.sizes = '(max-width:560px) calc(100vw - 28px), (max-width:1100px) calc(100vw - 80px), (max-width:1560px) calc(100vw - 144px), 1416px';
+        }
         if (containerId === 'gallery-ai') {
+          if(window.matchMedia('(max-width:560px)').matches){img.setAttribute('data-src','assets/mobile/ai-phone.webp');}
           img.style.width = '100%';
           img.style.maxWidth = '100%';
           img.style.height = 'auto';
@@ -638,7 +668,7 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
           status.style.display = 'block';
           status.innerHTML = message + '<br><br>';
           var retry = document.createElement('button'); retry.type = 'button'; retry.textContent = '重新加载';
-          retry.onclick = function (e) { e.preventDefault(); e.stopPropagation(); status.textContent = '正在重新加载…'; img.src = src + (src.indexOf('?') >= 0 ? '&' : '?') + 'retry=' + Date.now(); img._startTimer(); };
+          retry.onclick = function (e) { e.preventDefault(); e.stopPropagation(); status.textContent = '正在重新加载…'; var retrySrc=img.currentSrc || img.src || src; img.removeAttribute('srcset'); img.src = retrySrc + (retrySrc.indexOf('?') >= 0 ? '&' : '?') + 'retry=' + Date.now(); img._startTimer(); };
           status.appendChild(retry);
         }
         img.onerror = function(){showRetry('图片加载失败，请重试');};
@@ -727,7 +757,6 @@ DATA.images.refactor = Array.from({length:7}, function(_,i){return 'assets/mobil
     viewerZoom = Math.max(.05, Math.min(4, viewerZoom * (e.deltaY < 0 ? 1.12 : .89)));
     applyViewerZoom();
   }, { passive:false });
-  document.querySelector('.resume-table-card').addEventListener('click', function(){ openViewer(this.getAttribute('data-full'), this.getAttribute('data-title'), 'resume'); });
 
   function renderUxBoards(items) {
     var box = document.getElementById('uxBoardGrid');
